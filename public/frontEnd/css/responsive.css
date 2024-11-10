@@ -1,0 +1,456 @@
+@media screen and (min-width:320px) and (max-width:767px) {
+    
+    /* ==== website design css start ===   */
+    .slider-text {
+        position: absolute;
+        left: 12px;
+    }
+    .slider-text h2 {
+        width: auto;
+        font-size: 28px;
+    }
+    .slider-text p {
+        margin: 15px 0;
+        font-size: 16px;
+    }
+    .slider-item {
+        height: 340px;
+    }
+    .counter-item {
+        margin: 15px 0;
+    }
+    .coverage_area ul {
+        display: grid;
+        grid-template-columns: repeat(1fr);
+    }
+    .contact-item {
+        margin-top: 25px;
+    }
+    .mobile-nav a.active {
+        border: 2px solid var(--primary-color);
+        display: inline-block;
+        padding: 4px 9px;
+        border-radius: 5px;
+        color: var(--primary-color);
+    }
+    .track-search form input {
+        height: 44px;
+    }
+    .page-section {
+        padding: 40px 0;
+    }
+    .about-image img {
+        margin-top: 25px;
+    }
+    .about-image img {
+        margin-top: 25px;
+    }
+
+    .mission-section img {
+        margin-top: 0;
+        margin-bottom: 25px;
+    }
+    .desktop_none {
+        display: contents;
+    }
+        .header-top.sm-none {
+            display: none;
+        }
+        .mobile-header {
+            display: block;
+            padding: 15px 0;
+            background: #fff;
+        }
+        .mobile-logo img {
+            width: 60px;
+        }
+
+        .mobile-logo {
+            text-align: center;
+        }
+        .mheader-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            align-items: center;
+            gap: 15px;
+        }
+        .nav-icon i {
+            font-size: 20px;
+        }
+        .mobile-user {
+            text-align: right;
+        }
+        .content-gap {
+            margin-top: 0;
+        }
+        .footer-nav {
+            display: block;
+        }
+        .track-form {
+            margin-top: 0;
+        }
+        .service-item {
+            margin: 25px 0;
+            height: auto;
+            padding: 25px;
+            padding-top: 0;
+        }
+        .service-section .section-title {
+            padding-bottom: 0;
+        }
+        ul#service_tab {
+            margin-bottom: 45px;
+        }
+        ul#service_tab li button {
+            margin-bottom: 5px;
+        }
+        .service-section,.pricing-section,.client-section,.faq-section
+        ,.footer-top {
+            padding: 30px 0 !important;
+        }
+        .section-title h4 {
+            font-size: 22px;
+        }
+        .pricing-title h4 {
+            font-size: 18px;
+        }
+
+        .pricing-section .table td {
+            font-weight: 500;
+            font-size: 15px;
+        }
+        .our-clients ul {
+            grid-template-columns: repeat(2,1fr);
+        }
+        .accordion-button {
+            color: #555 !important;
+            font-weight: 500 !important;
+        }
+        .footer-item {
+            margin-top: 15px;
+        }
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: -200px;
+            z-index: 9999999;
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.35s all;
+            height: 100%;
+            padding: 0px 20px;
+        }
+        .mobile-nav.active {
+            left: 0;
+            visibility: visible;
+            opacity: 1;
+            background: #fff;
+        }
+        .nav-logo-icon {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            padding: 15px 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .close-icon {
+            text-align: right;
+            padding-right: 15px;
+            font-size: 20px;
+        }
+
+        .mobile-nav ul li {
+            display: block;
+        }
+
+        .mobile-nav ul {
+            margin-top: 25px;
+        }
+
+        .mobile-nav ul li {
+            display: block;
+        }
+
+        .mobile-nav ul li a {
+            margin-bottom: 15px;
+            display: block;
+            font-weight: 600;
+            color: #666;
+        }
+        .footer-nav {
+            background: #fff;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+        }
+
+        .footer-nav ul {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            padding: 12px 15px;
+        }
+
+        .footer-nav ul li span {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: #555;
+            margin-top: 5px;
+        }
+
+        .footer-nav ul li a {
+            text-align: center;
+        }
+
+        .footer-nav ul li a i {
+            display: block;
+            font-size: 17px;
+            color: var(--primary-color);
+        }
+        footer.footer {
+            margin-bottom: 65px;
+        }
+
+    /* ==== website design css end ===   */
+
+
+    /* ==== user panel css start ===   */
+    .website-logo img {
+        width: 60px;
+    }
+    .user-logo img {
+        width: 55px;
+    }
+
+    .user-logo {
+        text-align: center;
+    }
+    .user-mheader {
+        display: block;
+    }
+    body{
+        font-size: 14px !important;
+    }
+    div#page-overlay {
+        background: rgba(0,0,0,0.3);
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        content: "";
+        left: 0;
+        top: 0;
+        display: none;
+        transition: 0.35s all;
+    }
+    .page-content {
+        padding: 15px;
+    }
+    .user-sidebar {
+        visibility: hidden;
+        opacity: 0;
+        left: -200px;
+        transition: 0.35s all;
+    }
+    .user-sidebar.active {
+        position: fixed;
+        top: 0;
+        left: 0;
+        visibility: visible;
+        opacity: 1;
+        display: block;
+        background: #fff;
+        height: 100%;
+        z-index: 9999999;
+    }
+    .user-container {
+        padding-left: 0;
+        padding-bottom: 80px;
+    }
+    .user-header {
+        display: none;
+    }
+    .user-mheader {
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        align-items: center;
+        padding: 15px 20px;
+        background: #fff;
+    }
+    .user-toggle button {
+        color: var(--primary-color);
+        font-size: 20px;
+    }
+
+    .mobile-search button {
+        font-size: 20px;
+        color: var(--primary-color);
+    }
+    .mobile-search {
+        text-align: right;
+    }
+    .website-logo {
+        margin: 12px 0;
+    }
+    .user-info {
+        display: grid;
+        grid-template-columns: 70px auto;
+        gap: 15px;
+        padding: 7px 0;
+        align-items: center;
+    }
+    .user-info h5 {
+        margin-top: 0;
+        font-size: 16px;
+        text-align: left;
+    }
+    .user-info p {
+        font-size: 14px;
+    }
+    .user-img img {
+        width: 55px;
+        border-radius: 50px;
+    }
+    .des-item {
+        margin: 5px 0;
+        padding: 10px 0;
+    }
+    
+    .parcel-counter {
+        grid-template-columns: repeat(2,1fr);
+    }
+    .des-item h4 {
+        font-size: 16px;
+        font-weight: 600;
+    }
+    .des-item h6 {
+        font-size: 14px;
+    }
+
+    .inner-chart h3 {
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .inner-chart h6 {
+        font-size: 14px;
+    }
+    .page-header {
+        margin-top: 15px;
+        padding-bottom: 8px;
+    }
+    .col-sm-3.main-Pie {
+        order: 2;
+    }
+    .user-footer {
+        background: #fff;
+        z-index: 999;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        display: block;
+    }
+
+    .user-footer ul {
+        display: grid;
+        grid-template-columns: repeat(5,1fr);
+        align-items: center;
+        padding: 12px 0;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .user-footer ul li {
+        text-align: center;
+    }
+
+    .user-footer ul li p {
+        text-align: center;
+        color: #777 !important;
+    }
+    .user-footer ul li.active p {
+        color: var(--primary-color) !important;
+    }
+
+    .user-footer ul li a i {
+        font-size: 18px;
+        color: #555;
+        border-radius: 50px;
+        height: 35px;
+        width: 36px;
+        line-height: 35px;
+        text-align: center;
+    }
+    .user-footer ul li.active i {
+        background: var(--primary-color);
+        color: #fff;
+    }
+    .marchant-profile {
+        margin-top: 15px;
+    }
+    .parcel-estimate {
+        margin-top: 15px;
+    }
+    .desktop-show {
+        display: none !important;
+    }
+    .mobile-show {
+        display: table-cell !important;
+    }
+    .parcle-header {
+        display: grid;
+        grid-template-columns: 60% 40%;
+        align-items: center;
+    }
+    .payable-box {
+        margin: 5px 0;
+    }
+    .parcel-info.d-flex{
+        display: block !important;
+    }
+    .custom-filter h6 {
+        margin-bottom: 10px;
+    }
+    .payment-total {
+        display: none;
+    }
+    .manage-btns {
+        display: none;
+    }
+    .parcel-info-right.text-end {
+        text-align: left !important;
+        margin: 25px 0 !important;
+    }
+    .user-search .fa-times {
+        position: absolute;
+        top: -26px;
+        right: 0;
+        font-size: 20px;
+        background: #fff;
+        width: 25px;
+        height: 25px;
+        text-align: center;
+        line-height: 25px;
+        border-radius: 50px;
+    }
+    .consignment_msearch.active{
+        visibility: visible;
+        opacity: 1;
+    }
+    .consignment_msearch.active button {
+        background: #ffff;
+    }
+
+    /* ==== user panel css end ===   */
+}
+
+@media screen and (min-width:320px) and (max-width:620px) {
+
+}
+
+@media screen and (min-width:992px) and (max-width: 1199px) {}
+
+
+@media screen and (min-width:768px) and (max-width: 991px) {
+
+}
