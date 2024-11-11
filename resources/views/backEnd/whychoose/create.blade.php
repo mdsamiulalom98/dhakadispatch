@@ -45,7 +45,7 @@
                             <div class="col-sm-12 mb-3">
                                 <div class="form-group">
                                     <label for="description" class="form-label">Description *</label>
-                                    <textarea name="description" class="summernote form-control @error('description') is-invalid @enderror" id="description"
+                                    <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="description"
                                         rows="5"></textarea>
                                     @error('description')
                                         <span class="invalid-feedback" role="alert">
@@ -55,6 +55,19 @@
                                 </div>
                             </div>
                             <!-- col-end -->
+                            <div class="col-sm-12 mb-3">
+                                <div class="form-group">
+                                    <label for="image" class="form-label">Image *</label>
+                                    <input type="file" class="form-control @error('image') is-invalid @enderror"
+                                        name="image" value="{{ old('image') }}" id="image" required="">
+                                    @error('image')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <!-- ========= -->
 
                             <div class="col-sm-6 mb-3">
                                 <div class="form-group">

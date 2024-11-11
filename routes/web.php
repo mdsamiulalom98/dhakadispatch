@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Artisan;
 
 use App\Http\Controllers\FrontEnd\FrontendController;
 use App\Http\Controllers\FrontEnd\MerchantController;
@@ -14,14 +16,12 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DistrictController;
 use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\BankController;
-use App\Http\Controllers\Admin\PixelsController;
 use App\Http\Controllers\Admin\GeneralSettingController;
 use App\Http\Controllers\Admin\SocialMediaController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\BannerCategoryController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\CreatePageController;
-use App\Http\Controllers\Admin\TagManagerController;
 use App\Http\Controllers\Admin\MerchantManageController;
 use App\Http\Controllers\Admin\ExpenseCategoriesController;
 use App\Http\Controllers\Admin\ExpenseController;
@@ -83,7 +83,7 @@ Route::group(['namespace' => 'FrontEnd', 'middleware' => ['check_refer','islogge
     Route::get('/register', [MerchantController::class, 'register'])->name('merchant.register');
     Route::post('/store', [MerchantController::class, 'store'])->name('merchant.store');
     Route::get('/verify', [MerchantController::class, 'verify'])->name('merchant.verify');
- 
+
     Route::post('/resend-otp', [MerchantController::class, 'resendotp'])->name('merchant.resendotp');
     Route::get('/forgot-password', [MerchantController::class, 'forgot_password'])->name('merchant.forgot.password');
     Route::post('/forgot-verify', [MerchantController::class, 'forgot_verify'])->name('merchant.forgot.verify');
@@ -110,7 +110,7 @@ Route::group(['namespace' => 'FrontEnd', 'middleware' => ['merchant', 'check_ref
     Route::get('/merchant/notification', [MerchantController::class, 'notification'])->name('merchant.notification');
     Route::get('/merchant/pricing', [MerchantController::class, 'pricing'])->name('merchant.parcel.pricing');
     Route::get('consignment-search', [MerchantController::class, 'consignment_search'])->name('merchant.consignment.search');
-    
+
     // parcel manage
     Route::get('parcel/cost-calculate', [ParcelController::class, 'cost_calculate'])->name('merchant.parcel.cost_calculate');
     Route::get('parcel/manage/{slug}', [ParcelController::class, 'index'])->name('merchant.parcel.index');
@@ -185,7 +185,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth', 'lock', 'check_re
     Route::get('change-password', [DashboardController::class, 'changepassword'])->name('change_password');
     Route::post('new-password', [DashboardController::class, 'newpassword'])->name('new_password');
 
-    // users route 
+    // users route
     Route::get('users/manage', [UserController::class, 'index'])->name('users.index');
     Route::get('users/create', [UserController::class, 'create'])->name('users.create');
     Route::post('users/save', [UserController::class, 'store'])->name('users.store');
@@ -213,19 +213,19 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth', 'lock', 'check_re
     Route::post('permissions/update', [PermissionController::class, 'update'])->name('permissions.update');
     Route::post('permissions/destroy', [PermissionController::class, 'destroy'])->name('permissions.destroy');
 
-     // parcel manage route 
+     // parcel manage route
     Route::get('parcel/manage/{slug}', [ParcelManageController::class, 'index'])->name('admin.parcel.index');
     Route::get('parcel/view/{id}', [ParcelManageController::class, 'view'])->name('admin.parcel.view');
     Route::get('parcel-status', [ParcelManageController::class, 'parcel_status'])->name('admin.parcel.status');
      Route::get('parcel/rider-assign', [ParcelManageController::class, 'rider_assign'])->name('admin.parcel.rider_assign');
 
-     // parcel manage route 
+     // parcel manage route
     Route::get('pickup/manage/{slug}', [PickupManageController::class, 'index'])->name('admin.pickup.index');
     Route::get('pickup-status', [PickupManageController::class, 'pickup_status'])->name('admin.pickup.status');
      Route::get('pickup/rider-assign', [PickupManageController::class, 'rider_assign'])->name('admin.pickup.rider_assign');
-    
-    
-    // merchant manage route 
+
+
+    // merchant manage route
     Route::get('merchant/payment/{status}', [MerchantManageController::class, 'payment'])->name('merchants.payment');
     Route::get('merchant/invoice/{id}', [MerchantManageController::class, 'invoice'])->name('merchants.invoice');
     Route::post('merchant/payment/status', [MerchantManageController::class, 'payment_status'])->name('merchants.payment.status');
@@ -242,7 +242,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth', 'lock', 'check_re
     Route::post('merchant/manual-payment/paid', [MerchantManageController::class, 'menual_payment_paid'])->name('merchants.menual_payment.paid');
 
 
-    // merchant manage route 
+    // merchant manage route
     Route::get('rider/payment/{status}', [RiderManageController::class, 'payment'])->name('riders.payment');
     Route::get('rider/invoice/{id}', [RiderManageController::class, 'invoice'])->name('riders.invoice');
     Route::post('rider/payment/status', [RiderManageController::class, 'payment_status'])->name('riders.payment.status');
@@ -294,7 +294,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth', 'lock', 'check_re
     Route::post('notice/inactive', [NoticeController::class, 'inactive'])->name('notice.inactive');
     Route::post('notice/active', [NoticeController::class, 'active'])->name('notice.active');
     Route::post('notice/destroy', [NoticeController::class, 'destroy'])->name('notice.destroy');
-    
+
     // service route
     Route::get('service/manage', [ServiceController::class, 'index'])->name('services.index');
     Route::get('service/create', [ServiceController::class, 'create'])->name('services.create');
@@ -344,7 +344,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth', 'lock', 'check_re
     Route::post('faq/destroy', [FaqController::class, 'destroy'])->name('faq.destroy');
 
 
-    
+
     // district routes
     Route::get('districts/manage', [DistrictController::class, 'index'])->name('districts.index');
     Route::get('districts/{id}/show', [DistrictController::class, 'show'])->name('districts.show');
@@ -379,7 +379,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth', 'lock', 'check_re
     Route::post('banks/destroy', [BankController::class, 'destroy'])->name('banks.destroy');
 
 
-    // settings route 
+    // settings route
     Route::get('settings/manage', [GeneralSettingController::class, 'index'])->name('settings.index');
     Route::get('settings/create', [GeneralSettingController::class, 'create'])->name('settings.create');
     Route::post('settings/save', [GeneralSettingController::class, 'store'])->name('settings.store');
@@ -389,7 +389,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth', 'lock', 'check_re
     Route::post('settings/active', [GeneralSettingController::class, 'active'])->name('settings.active');
     Route::post('settings/destroy', [GeneralSettingController::class, 'destroy'])->name('settings.destroy');
 
-    // settings route 
+    // settings route
     Route::get('social-media/manage', [SocialMediaController::class, 'index'])->name('socialmedias.index');
     Route::get('social-media/create', [SocialMediaController::class, 'create'])->name('socialmedias.create');
     Route::post('social-media/save', [SocialMediaController::class, 'store'])->name('socialmedias.store');
@@ -399,7 +399,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth', 'lock', 'check_re
     Route::post('social-media/active', [SocialMediaController::class, 'active'])->name('socialmedias.active');
     Route::post('social-media/destroy', [SocialMediaController::class, 'destroy'])->name('socialmedias.destroy');
 
-    // contact route 
+    // contact route
     Route::get('contact/manage', [ContactController::class, 'index'])->name('contact.index');
     Route::get('contact/create', [ContactController::class, 'create'])->name('contact.create');
     Route::post('contact/save', [ContactController::class, 'store'])->name('contact.store');
@@ -409,7 +409,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth', 'lock', 'check_re
     Route::post('contact/active', [ContactController::class, 'active'])->name('contact.active');
     Route::post('contact/destroy', [ContactController::class, 'destroy'])->name('contact.destroy');
 
-    // banner category route 
+    // banner category route
     Route::get('banner-category/manage', [BannerCategoryController::class, 'index'])->name('banner_category.index');
     Route::get('banner-category/create', [BannerCategoryController::class, 'create'])->name('banner_category.create');
     Route::post('banner-category/save', [BannerCategoryController::class, 'store'])->name('banner_category.store');
@@ -419,7 +419,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth', 'lock', 'check_re
     Route::post('banner-category/active', [BannerCategoryController::class, 'active'])->name('banner_category.active');
     Route::post('banner-category/destroy', [BannerCategoryController::class, 'destroy'])->name('banner_category.destroy');
 
-    // banner  route 
+    // banner  route
     Route::get('banner/manage', [BannerController::class, 'index'])->name('banners.index');
     Route::get('banner/create', [BannerController::class, 'create'])->name('banners.create');
     Route::post('banner/save', [BannerController::class, 'store'])->name('banners.store');
@@ -429,7 +429,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth', 'lock', 'check_re
     Route::post('banner/active', [BannerController::class, 'active'])->name('banners.active');
     Route::post('banner/destroy', [BannerController::class, 'destroy'])->name('banners.destroy');
 
-    // contact route 
+    // contact route
     Route::get('page/manage', [CreatePageController::class, 'index'])->name('pages.index');
     Route::get('page/create', [CreatePageController::class, 'create'])->name('pages.create');
     Route::post('page/save', [CreatePageController::class, 'store'])->name('pages.store');
@@ -437,7 +437,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth', 'lock', 'check_re
     Route::post('page/update', [CreatePageController::class, 'update'])->name('pages.update');
     Route::post('page/inactive', [CreatePageController::class, 'inactive'])->name('pages.inactive');
     Route::post('page/active', [CreatePageController::class, 'active'])->name('pages.active');
-    Route::post('page/destroy', [CreatePageController::class, 'destroy'])->name('pages.destroy');    
+    Route::post('page/destroy', [CreatePageController::class, 'destroy'])->name('pages.destroy');
 
     Route::get('about/manage', [AboutController::class, 'index'])->name('abouts.index');
     Route::get('about/create', [AboutController::class, 'create'])->name('abouts.create');

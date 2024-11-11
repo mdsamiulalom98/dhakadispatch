@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Brian2694\Toastr\Facades\Toastr;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\File;
 use App\Models\Whychooseus;
-use Toastr;
+
 class WhychooseusController extends Controller
 {
     function __construct()
@@ -22,7 +25,7 @@ class WhychooseusController extends Controller
         return view('backEnd.whychoose.index', compact('show_data'));
     }
     public function create()
-    { 
+    {
         return view('backEnd.whychoose.create');
     }
     public function store(Request $request)
@@ -32,7 +35,25 @@ class WhychooseusController extends Controller
             'status' => 'required',
         ]);
 
+        // image with intervention
+        $image = $request->file('image');
+        $name =  time() . '-' . $image->getClientOriginalName();
+        $name = preg_replace('"\.(jpg|jpeg|png|webp)$"', '.webp', $name);
+        $name = strtolower(preg_replace('/\s+/', '-', $name));
+        $uploadpath = 'public/uploads/whychooseus/';
+        $imageUrl = $uploadpath . $name;
+        $img = Image::make($image->getRealPath());
+        $img->encode('webp', 90);
+        $width = 210;
+        $height = 210;
+        $img->height() > $img->width() ? $width = null : $height = null;
+        $img->resize($width, $height, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+        $img->save($imageUrl);
+
         $input = $request->all();
+        $input['image'] = $imageUrl;
         Whychooseus::create($input);
         Toastr::success('Success', 'Data insert successfully');
         return redirect()->route('whychooseus.index');
@@ -44,13 +65,36 @@ class WhychooseusController extends Controller
         return view('backEnd.whychoose.edit', compact('edit_data'));
     }
 
-    public function update(Request $request){
+    public function update(Request $request)
+    {
         $this->validate($request, [
             'status' => 'required',
         ]);
         $update_data = Whychooseus::find($request->id);
         $input = $request->all();
-        $input['status'] = $request->status?1:0;
+        $image = $request->file('image');
+        if($image){
+            // image with intervention
+            $name =  time().'-'.$image->getClientOriginalName();
+            $name = preg_replace('"\.(jpg|jpeg|png|webp)$"', '.webp',$name);
+            $name = strtolower(preg_replace('/\s+/', '-', $name));
+            $uploadpath = 'public/uploads/whychooseus/';
+            $imageUrl = $uploadpath.$name;
+            $img=Image::make($image->getRealPath());
+            $img->encode('webp', 90);
+            $width = 210;
+            $height = 210;
+            $img->height() > $img->width() ? $width=null : $height=null;
+            $img->resize($width, $height, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $img->save($imageUrl);
+            $input['image'] = $imageUrl;
+            File::delete($update_data->image);
+        }else{
+            $input['image'] = $update_data->image;
+        }
+        $input['status'] = $request->status ? 1 : 0;
         $update_data->update($input);
 
 
